@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -38,6 +39,22 @@ class ArticleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findAllWithTags(Bool $actif = false): array //Bool = Boolean
+    {
+        $query = $this->createQueryBuilder('a')
+            ->select('a', 'u', 'c')
+            ->leftJoin('a.categories' , 'c')    //leftjoin car on veut recuperer tous les articles ecux qui ont des categories comme ceux qui n'en n'ont pas//
+            ->innerJoin('a.user', 'u');
+
+            if ($actif) {
+                $query->andWhere('a.actif = :actif')
+                    ->setParameter('actif', $actif);
+            }
+            return $query->orderBy('a.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+        } 
 
 //    /**
 //     * @return Article[] Returns an array of Article objects

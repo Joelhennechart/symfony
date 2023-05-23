@@ -66,7 +66,7 @@ class Article
     private ?int $imageSize = null;
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'articles')]
-    private Collection $categories;
+    private Collection $categories; //objet de type collection//
 
     public function __construct()
     {

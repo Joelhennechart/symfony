@@ -9,6 +9,12 @@
 		<h2 class="blog-card-header">{{ article.titre }}</h2>
 		<p class="blog-card-contenu">{{ article.contenu|slice(0, 100) ~ '...' }}</p>
 		<p class="blog-card-author">{{ article.user.fullName }}</p>
+		<p class="text-muted">
+			{% for categorie in article.categories %}
+				#{{ categorie.titre }}
+				
+			{% endfor %}
+
 		{% if app.request.get('_route') == 'admin.article.index' %}
 			<div class="d-flex justify-content-between mt-auto">
 				<a href="{{ path('admin.article.update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
