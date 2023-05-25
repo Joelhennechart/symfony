@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
 	<section class="container mt-4">
 		<h1 class="text-center">Administration des articles</h1>
 		<a href="{{ path('admin.article.create') }}" class="btn btn-secondary">Créer un article</a>
@@ -15,4 +16,17 @@
 			{% endfor %}
 		</div>
 	</section>
+=======
+    <section class="container mt-4">
+        <h1 class="text-center">Administration des articles</h1>
+        <a href="{{ path('admin.article.create') }}" class="btn btn-secondary">Créer un article</a>
+        <div class="row g-2 mt-4">
+            <div class="blog-list md-4">
+                {% for article in articles %}
+                    {% include 'Components/_card.html.twig' %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
 {% endblock %}

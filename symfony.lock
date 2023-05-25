@@ -343,7 +343,11 @@
             "ref": "1b3064c2f6b255c2bc2f56461aaeb76b11e07e36"
         },
         "files": [
+<<<<<<< HEAD
             "config/packages/vich_uploader.yaml"
+=======
+            "./config/packages/vich_uploader.yaml"
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
         ]
     }
 }

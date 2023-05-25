@@ -16,5 +16,8 @@ return [
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
+<<<<<<< HEAD
     Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
+=======
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
 ];

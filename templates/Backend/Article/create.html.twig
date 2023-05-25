@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html.twig' %}
 
 {% block title %}
@@ -11,3 +12,16 @@
 		{% include 'Backend/Article/_form.html.twig' with {button_label: 'Créer'} %}
 	</section>
 {% endblock %}
+=======
+{% extends 'base.html.twig' %}  
+{% block title %}
+    Création d'un article |
+     {{parent() }} {# Je recupere ce qu'il y'a dans la balise parent, aussi non elle serait écrasé #}
+{% endblock %}
+{% block body %}
+    <section class="container mt-4">
+        <h1 class="text-center">Création d'un article</h1>
+        {% include 'Backend/Article/_form.html.twig' with{button_label: 'Créer'} %}
+    </section>
+{% endblock %}
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8

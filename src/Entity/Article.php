@@ -8,10 +8,17 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+<<<<<<< HEAD
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+=======
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[UniqueEntity(fields: ['titre'], message: 'Ce titre est déjà utilisé par un autre article')]
@@ -22,11 +29,19 @@ class Article
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+<<<<<<< HEAD
 
     #[ORM\Column(length: 255, unique: true)]
     #[Assert\Length(
         min: 5,
         max: 255,
+=======
+//Régles taille du titre de l'article
+    #[ORM\Column(length: 255, unique: true)] //en bdd
+    #[Assert\Length(    //sur synfony
+        min:5,
+        max:255,
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
         minMessage: 'Le titre ne peux pas être inferieur à {{ limit }} caractères.',
         maxMessage: 'Le titre ne peux pas être supérieur à {{ limit }} caractères.'
     )]
@@ -65,6 +80,7 @@ class Article
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;
 
+<<<<<<< HEAD
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'articles')]
     private Collection $categories; //objet de type collection//
 
@@ -72,6 +88,8 @@ class Article
     {
         $this->categories = new ArrayCollection();
     }
+=======
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
 
     public function getId(): ?int
     {
@@ -161,7 +179,10 @@ class Article
 
         return $this;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
@@ -206,6 +227,7 @@ class Article
     {
         return $this->imageSize;
     }
+<<<<<<< HEAD
 
     /**
      * @return Collection<int, Categorie>
@@ -233,4 +255,6 @@ class Article
 
         return $this;
     }
+=======
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
 }

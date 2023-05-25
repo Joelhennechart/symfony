@@ -10,6 +10,7 @@ vich_uploader:
     #        upload_destination: '%kernel.project_dir%/public/images/products'
     #        namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
+<<<<<<< HEAD
     mappings:
         article:
             uri_prefix: /images/articles
@@ -18,3 +19,15 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+=======
+
+    mappings:
+        article:
+            uri_prefix: /images/articles
+            upload_destination: '%kernel.project_dir%/public/images/articles'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8

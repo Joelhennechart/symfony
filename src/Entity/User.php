@@ -2,6 +2,12 @@
 
 namespace App\Entity;
 
+<<<<<<< HEAD
+=======
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
@@ -130,6 +136,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->lastName;
     }
 
+
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
@@ -142,6 +149,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return "$this->firstName $this->lastName";
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9953f0185306168e882550e7ab66a9b8309f44e8
     /**
      * @return Collection<int, Article>
      */

@@ -5,45 +5,47 @@ namespace App\Controller\Backend;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/article', name: 'admin.article')]
-class ArticleController extends AbstractController
+class ArticleBackendController extends AbstractController
 {
     public function __construct(
-        private readonly ArticleRepository $repo  //repository n'est pas 1 article mais une instence qui permet de manipuler les articles
+        private readonly ArticleRepository $repo
     ) {
     }
 
     #[Route('', name: '.index', methods: ['GET'])]
     public function index(): Response
     {
-        return  $this->render(              //render: chemin vers le fichier de la vue (html)
+        return  $this->render(
             'Backend/Article/index.html.twig',
             [
-                'articles' => $this->repo->findAll(),//On recupere toutes les entrées de la table article
+                'articles' => $this->repo->findAllWithTags(),
             ]
         );
     }
-    #[Route('/create', name: ".create", methods:['GET', 'POST'])]                              //#= attribut php8
+
+    #[Route('/create', name: ".create", methods: ['GET', 'POST'])]
     public function create(Request $request): Response|RedirectResponse
-    {  
-         //Création d'un nouvel objet article 
+    {
+        // Création d'un nouvel objet Article
         $article = new Article();
 
-        $form = $this->createForm(ArticleType::class, $article); //::class récupére tous le namespace et la classe de l'article
-        $form->handleRequest($request);     //inspecte si le formulaire a bien était soumis
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            //dd($article);   //=var_dump and die de $article 
-            $article->setUser($this->getUser()); //setUser($this->getUser()) recupére bdans 1controleur l'utilsateur connecté
-            
-            $this->repo->save($article, true); //true aussi non ca ne sauvegarde pas en bdd 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUser($this->getUser());
+
+            $this->repo->save($article, true);
+
             $this->addFlash('success', 'Article created successfully');
+
             return $this->redirectToRoute('admin.article.index');
         }
 
@@ -60,13 +62,14 @@ class ArticleController extends AbstractController
 
             return $this->redirectToRoute('admin.article.index');
         }
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->repo->save($article, true);
 
-            $this->addFlash('success', 'Article modified successfully');
+            $this->addFlash('success', 'Article modified  successfully');
 
             return $this->redirectToRoute('admin.article.index');
         }
@@ -74,25 +77,27 @@ class ArticleController extends AbstractController
         return $this->render('Backend/Article/update.html.twig', [
             'form' => $form,
         ]);
-
     }
 
     #[Route('/delete/{id}', name: '.delete', methods: ['POST', 'DELETE'])]
     public function delete(?Article $article, Request $request): RedirectResponse
     {
         if (!$article instanceof Article) {
-            $this->addFlash('error', 'Article not found');
+            $this->addFlash('error',  'Article not found');
+
             return $this->redirectToRoute('admin.article.index');
         }
-    
-    if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('token'))) {
-        $this->repo->remove($article, true);
 
-        $this->addFlash('success', 'Article deleted successfully');
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('token'))) {
+            $this->repo->remove($article, true);
 
-        return $this->redirectToRoute('admin.article.index');
+            $this->addFlash('success', 'Article deleted successfully');
+
+            return $this->redirectToRoute('admin.article.index');
         }
+
         $this->addFlash('error', 'Token invalide');
+
         return $this->redirectToRoute('admin.article.index');
     }
-    }
+}
