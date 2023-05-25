@@ -37,7 +37,8 @@ class ArticleType extends AbstractType
                     return $er->createQueryBuilder('c')
                         ->andWhere('c.actif = true')
                         ->orderBy('c.titre', 'ASC');
-            },
+                },
+                'required' => false,
             ])
             
             ->add('imageFile', VichImageType::class, [

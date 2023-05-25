@@ -1,0 +1,28 @@
+.article-main-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .sidebar {
+        width: 30%;
+        
+        .categories-list { 
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+        .categorie-item {
+            padding: 5px 10px;
+            border-radius: $border-radius;
+            background: $secondary;
+
+            //&:not(:last-child) {    on prend toutes les categories enfant sauf la derniére
+            //  margin-right: 10px; }
+            
+        }
+        }
+    }
+    .article-content {
+        width: 67%;
+    }
+}

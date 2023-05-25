@@ -1,0 +1,6 @@
+<div class='banner' style="background-image: url('{{ article.imageName ? vich_uploader_asset(article)
+ : 'https: //picsum .photos/ 1920px / 1080px;'}}')"> {# renvoi une photo aleatoire si on a pas ajouter de photos #}
+    <div class="banner-header">
+        <h1>{{ article.titre }}</h1>
+    </div>
+</div>
