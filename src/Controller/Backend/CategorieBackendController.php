@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/categorie', name: "admin.categorie")]
-class CategorieController extends AbstractController
+class CategorieBackendController extends AbstractController
 {
     public function __construct(
         private readonly CategorieRepository $repo

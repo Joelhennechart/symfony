@@ -51,7 +51,7 @@ class ArticleRepository extends ServiceEntityRepository
                 $query->andWhere('a.actif = :actif')
                     ->setParameter('actif', $actif);
             }
-            return $query->orderBy('a.createdAt', 'DESC')
+            return $query->orderBy('a.createdAt', 'DESC') // orderBy = Je viens recuperer les derniers articles creer dans l'ordre 
             ->getQuery()
             ->getResult();
         } 

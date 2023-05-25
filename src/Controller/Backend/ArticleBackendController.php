@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/article', name: 'admin.article')]
-class ArticleController extends AbstractController
+class ArticleBackendController extends AbstractController
 {
     public function __construct(
         private readonly ArticleRepository $repo
