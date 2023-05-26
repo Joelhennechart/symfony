@@ -20,13 +20,13 @@ class ArticleBackendController extends AbstractController
     ) {
     }
 
-    #[Route('', name: '.index', methods: ['GET'])]
+    #[Route('', name: '.index', methods: ['GET'])]                  //je viens rendre une vue 
     public function index(): Response
     {
-        return  $this->render(
+        return  $this->render(                                      
             'Backend/Article/index.html.twig',
             [
-                'articles' => $this->repo->findAllWithTags(),
+                'articles' => $this->repo->findAllWithTags(),       // Je recupere tous ce que la vue m'a rendue
             ]
         );
     }
@@ -35,9 +35,9 @@ class ArticleBackendController extends AbstractController
     public function create(Request $request): Response|RedirectResponse
     {
         // Création d'un nouvel objet Article
-        $article = new Article();
+        $article = new Article();                                   //Je crée un nouvel objet pour crée mon  ouvel article
 
-        $form = $this->createForm(ArticleType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article);    // methode qui crée un formulaire
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -19,11 +19,11 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', TextType::class, [
-                'label' => 'Titre:',
-                'required' => true,
+            ->add('titre', TextType::class, [                   //Toujours bien penser a importer les classes qu'on a crée
+                'label' => 'Titre:',                            // je dis a mon builder de crée une table Titre de type texte area
+                'required' => true,                             // c'est obligatoire
                 'attr' => [
-                    'placeholder' => 'Titre de votre article',
+                    'placeholder' => 'Titre de votre article',  // une fois que c'est finis la page affiche titre de votre article :  
                 ]
             ])
             ->add('categories', EntityType::class,[
