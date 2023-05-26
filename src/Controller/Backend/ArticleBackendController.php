@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/admin/article', name: 'admin.article')]
 class ArticleBackendController extends AbstractController
@@ -99,5 +100,16 @@ class ArticleBackendController extends AbstractController
         $this->addFlash('error', 'Token invalide');
 
         return $this->redirectToRoute('admin.article.index');
+    }
+
+    #[Route('/switch/{id}' , name: '.switch', methods: ['GET'])]        
+    //si article = null c'est que l'id demander correspond a rien. On affiche error 404 
+    public function switchVisibilityArticle(?Article $article): JsonResponse{
+        if (!$article instanceof Article) {
+            return new JsonResponse('Article not found', 404);
+        }    
+        $article->setActif(!$article->isActif());               //si article actif = true je renvoie false uniquement en boolean
+        $this->repo->save($article, true);
+        return new JsonResponse('Visibility changed', 201);   // code d erreur
     }
 }
