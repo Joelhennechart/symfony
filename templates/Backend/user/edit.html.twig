@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Modification d'un user |
+    {{ parent() }}
+{% endblock %}
+
+{% block  body %} 
+    <section class="container mt-4">
+    <h1 class="text-center"> Modification d'un user </h1>
+    {% include 'Backend/user/_form.html.twig' %}
+    </section>
+
+   {% endblock %} 
