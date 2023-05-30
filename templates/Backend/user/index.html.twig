@@ -27,6 +27,10 @@ Admin des users |
                         <td>{{ user.firstName }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.roles|json_encode }} </td> {# | on vient transformer la colonne roles en chaine de caractére pour qu'elle puisse s'afficher  #}
+                        <td>
+                            <a href="{{ path('admin.user.update', {'id': user.id })}}" class="btn btn-secondary">Modifier</a>
+                            {% include 'Backend/User/_deleteForm.html.twig' %}
+                        </td>
                     </tr>
 
                 {% endfor %}    

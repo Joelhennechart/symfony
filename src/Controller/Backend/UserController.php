@@ -49,4 +49,26 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/{id}/delete', name:'.delete' , methods: ['POST'])]
+    public function delete(?User $user, Request $request): RedirectResponse
+    {
+        if (!$user instanceof User) {
+
+            $this->addFlash('error', 'User not found');
+
+            return $this->redirectToRoute('admin.user.index');
+        }
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->get('token'))) {
+            $this->repo->remove($user, true);
+            
+            $this->addFlash('success', 'User deleted successfully');
+
+            return $this->redirectToRoute('admin.user.index');
+        }
+
+        $this->addFlash('eror', 'Invalid token');
+
+        return $this->redirectToRoute('admin.user.index');
+    }
 }
