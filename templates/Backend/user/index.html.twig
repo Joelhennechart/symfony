@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Admin des users |
+{{ parent() }}
+ {% endblock %}
+
+{% block body %}
+    <section class="container mt-4">
+        <h1 class="text-center"> Administration des users</h1>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Email</td>
+                    <td>Roles</td>
+                    <td>actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.roles|json_encode }} </td> {# | on vient transformer la colonne roles en chaine de caractére pour qu'elle puisse s'afficher  #}
+                    </tr>
+
+                {% endfor %}    
+            </tbody>
+        </table>
+    
+    0</section>
+{% endblock %}

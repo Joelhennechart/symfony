@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
@@ -20,25 +20,26 @@ class UserController extends AbstractController
         
     }
     #[Route('/register', name: 'app.user.register', methods: ['GET', 'POST'])]
-    public function register(Request $request, UserPasswordHasherInterface $hasher): Response
+    public function register(Request $request, UserPasswordHasherInterface $hasher): Response   //paramétre de la methode
     {   //on instancie User
         $user = new User();
 
-        $form = $this->createForm(RegistrationType::class, $user);
-        $form->handleRequest($request);
+        $form = $this->createForm(RegistrationType::class, $user);  //type stoque des formulaire, le champ etc...
+        $form->handleRequest($request);       //écouter la requéte du formulaire create form automatiquement handlerequest derriére
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()){      // est ce qu'il y' a des contraintes et est ce qu'elles sont respectées
             $user->setPassword(
-                $hasher->hashPassword($user, $form->get('password')->getData())
+                $hasher->hashPassword($user, $form->get('password')->getData()) // hashage du mot de passe 
             );
-            $this->repo->save($user, true);
 
-            $this->addFlash('success', 'Vous étes bien inscrit à notre application');
+            $this->repo->save($user, true);     // sauvegarde l'utilisateur dans la bdd
 
-            return $this->redirectToRoute('app.login');
+            $this->addFlash('success', 'Vous étes bien inscrit à notre application');   //message comme quoi tous va b ien
+
+            return $this->redirectToRoute('app.login');     //ouvre la page login
         }
 
-        return $this->render('user/index.html.twig', [
+        return $this->render('Frontend/User/register.html.twig', [  
             'form' => $form,
         ]);
     }
